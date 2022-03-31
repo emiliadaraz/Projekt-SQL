@@ -1,0 +1,250 @@
+-- 1. Stwórz Bazę „Sklep odzieżowy”
+
+CREATE DATABASE Sklep_odzieżowy;
+USE Sklep_odzieżowy;
+
+-- 2. Utwórz tabelę „Producenci” z kolumnami:
+
+id producenta
+nazwa producenta
+adres producenta
+nip producenta
+data podpisania umowy z producentem
+Do każdej kolumny ustaw odpowiedni „constraint”
+
+CREATE TABLE Producenci (
+Id_producenta INT PRIMARY KEY,
+Nazwa_producenta TEXT,
+Adres_producenta TEXT,
+Nip_producenta INT,
+Data_podpisania_umowy_z_producentem DATE
+);
+
+-- 3. Utwórz tabelę „Produkty” z kolumnami:
+
+id produktu
+id producenta
+nazwa produktu
+opis produktu
+cena netto zakupu
+cena brutto zakupu
+cena netto sprzedaży
+cena brutto sprzedaży
+procent VAT sprzedaży
+Do każdej kolumny ustaw odpowiedni „constraint”
+
+CREATE TABLE Produkty (
+id_produktu INT PRIMARY KEY,
+id_producenta INT,
+nazwa_producenta TEXT,
+nazwa_produktu VARCHAR (30),
+opis_produktu TEXT,
+cena_netto_zakupu DECIMAL (10,2),
+cena_brutto_zakupu DECIMAL (10,2),
+cena_netto_sprzedaży DECIMAL (10,2),
+cena_brutto_sprzedaży DECIMAL (10,2),
+procent_VAT_sprzedaży DOUBLE
+);
+
+
+4. Utwórz tabelę „Zamówienia” z kolumnami:
+
+id zamówienia
+id klienta
+id produktu
+Data zamówienia
+Do każdej kolumny ustaw odpowiedni „constraint”
+
+CREATE TABLE Zamówienia (
+Id_zamówienia INT PRIMARY KEY,
+Id_klienta INT,
+Id_produktu INT,
+Data_zamówienia DATE
+);
+
+5. Utwórz tabelę „Klienci” z kolumnami:
+
+id klienta
+id zamówienia
+imię
+nazwisko
+adres
+Do każdej kolumny ustaw odpowiedni „constraint”
+
+CREATE TABLE Klienci (
+Id_klienta INT PRIMARY KEY,
+Id_zamówienia INT,
+Imię VARCHAR (30),
+Nazwisko VARCHAR (30),
+adres TEXT
+);
+ 
+-- 6. Połącz tabele ze sobą za pomocą kluczy obcych:
+
+Produkty – Producenci
+Zamówienia – Produkty
+Zamówienia - Klienci
+
+ALTER TABLE Produkty
+ADD FOREIGN KEY (id_producenta) REFERENCES Producenci (id_producenta);
+
+ALTER TABLE Zamówienia
+ADD FOREIGN KEY (id_produktu) REFERENCES Produkty (id_produktu);
+
+ALTER TABLE Klienci
+ADD FOREIGN KEY (id_zamówienia) REFERENCES Zamówienia (id_zamówienia);
+
+-- 7. Każdą tabelę uzupełnij danymi wg:
+
+-- Tabela „Producenci” – 4 pozycje
+
+INSERT INTO Producenci (Id_producenta, Nazwa_producenta, Adres_producenta, Nip_producenta, Data_podpisania_umowy_z_producentem)
+VALUES (1, 'SAMSUNG_ELECTRONICS_POLSKA_SP_Z_O_O ', 'Postępu_15C_02-676_Warszawa', 5261044039, '2020-02-11'),
+(2, 'APPLE_POLAND_SP_Z_O_O ', 'Chmielna_19_00-021_Warszawa', 5222826950, '2018-01-31'),
+(3, 'HUAWEI_POLSKA_SP_Z_O_O ', 'Domaniewska_50_02-672_Warszawa', 5262800201, '2021-03-15'),
+(4, 'HP_POLSKA_SP_Z_O_O ', 'Leonarda_Da_Vinci_9_44-121_Gliwice', 7251020699, '2015-01-05'),
+(5, 'ASUS_POLSKA_SP_Z_O_O ', 'Cybernetyki_9_02-677_Warszawa', 5222779363, '2021-05-04');
+
+SELECT * FROM Producenci;
+
+-- Tabela „Produkty” – 20 pozycji
+
+INSERT INTO Produkty (id_produktu, id_producenta, nazwa_producenta, nazwa_produktu, opis_produktu, cena_netto_zakupu, cena_brutto_zakupu, cena_netto_sprzedaży, cena_brutto_sprzedaży, procent_VAT_sprzedaży)
+VALUES (1, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_ASUS_A516JA-BQ2252', 1699.00, 2089.77, 2299.00, 2827.77, 0.23),
+(2, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'VivoBook', 'Laptop_ASUS_VivoBook_K513EA', 3599.00, 4426.77, 4277.00, 5260.71, 0.23),
+(3, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_ASUS_Rog_Strix_G15_G513IC', 4350.00, 5350.50, 4599.00, 5656.77, 0.23),
+(4, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_ASUS_A515JA-BQ2225W', 2000.00, 2460.00, 2350.00, 2890.50, 0.23),
+(5, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_ASUS_TUF_Gaming_F15', 4000.00, 4920.00, 4399.00, 5410.77, 0.23),
+(6, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'VivoBook', 'Laptop_ASUS_VivoBook_Pro_K3500PC-L1010W', 4000.00, 4920.00, 4399.00, 5410.77, 0.23),
+(7, 5, 'ASUS_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_ASUS_TUF_F15_FX506HCB-HN161', 2000.00, 2460.00, 2350.00, 2890.50, 0.23),
+(8, 1, 'SAMSUNG_ELECTRONICS_POLSKA_SP_Z_O_O ', 'NoteBook', 'Laptop_Samsung_900X3C_i7-3517U/4GB/128/7HP64', 4000.00, 4920.00, 4999.00, 6148.77, 0.23),
+(9, 1, 'SAMSUNG_ELECTRONICS_POLSKA_SP_Z_O_O ', 'Tablet', 'Tablet_SAMSUNG_Galaxy_Tab_S8+_12.4', 4000.00, 4920.00, 4399.00, 5410.77, 0.23),
+(10, 1, 'SAMSUNG_ELECTRONICS_POLSKA_SP_Z_O_O ', 'Tablet', 'Tablet_SAMSUNG_Galaxy_Tab_S6_Lite_10.4', 1000.00, 1230.00, 1399.00, 1720.77, 0.23),
+(11, 2, 'APPLE_POLAND_SP_Z_O_O ', 'MacBook', 'Laptop_APPLE_MacBook_Air_13_i3/8GB/256GB_SSD/INT/macOS', 4000.00, 4920.00, 4407.00, 5420.61, 0.23),
+(12, 2, 'APPLE_POLAND_SP_Z_O_O ', 'MacBook', 'Apple_Macbook_Air_M1_13,3_Apple_M1', 4299.00, 5287.77, 4999.00, 6148.77, 0.23),
+(13, 2, 'APPLE_POLAND_SP_Z_O_O ', 'MacBook', 'Laptop_APPLE_Macbook_Air_13.3_Retina_M1_8GB_SSD_256GB_macOS', 4299.00, 5287.77, 4999.00, 6148.77, 0.23),
+(14, 3, 'HUAWEI_POLSKA_SP_Z_O_O ', 'MacBook', 'Laptop_HUAWEI_MateBook_D_15_15.6_IPS_i5-10210U_8GB_SSD_512GB', 3299.00, 4057.77, 3599.00, 4426.77, 0.23),
+(15, 3, 'HUAWEI_POLSKA_SP_Z_O_O ', 'MacBook', 'Laptop_Huawei_MateBook_D_16_16,1_AMD_Ryzen_5_4600H-16GB', 3999.00, 4918.77, 4599.00, 5656.77, 0.23),
+(16, 3, 'HUAWEI_POLSKA_SP_Z_O_O ', 'MacBook', 'Laptop_HUAWEI_MateBook_14S_14.2_i5-11300H_8GB', 4404.00, 5416.92, 5099.00, 6271.77, 0.23),
+(17, 4, 'HP_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_HP_Pavilion_15-EG1103NW_15.6_i5-1155G7_8GB_SSD', 3299.00, 4057.77, 3599.00, 4426.77, 0.23),
+(18, 4, 'HP_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_HP_15-eg0312nw_15,6_Intel_Core_i5-1135G7_-_8GB_RAM_-_512GB', 2999.00, 3688.77, 3299.00, 4057.77, 0.23),
+(19, 4, 'HP_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_HP_15-eg0315nw_15,6_Intel_Core_i5-1135G7_-_8GB_RAM_-_512GB', 1000.00, 1230.00, 1399.00, 1720.77, 0.23),
+(20, 4, 'HP_POLSKA_SP_Z_O_O ', 'Laptop', 'Laptop_HP_15-eg0320nw_15,6_Intel_Core_i5-1135G7_-_8GB_RAM_-_512GB', 4404.00, 5416.92, 5099.00, 6271.77, 0.23);
+
+SELECT * FROM Produkty;
+
+-- Tabela „Zamówienia” – 10 pozycji
+
+INSERT INTO Zamówienia (Id_zamówienia, Id_klienta, Id_produktu, Data_zamówienia)
+VALUES (1, 1, 2, '2021-03-12'),
+(2, 3, 4, '2022-01-01'),
+(3, 2, 10, '2021-03-21'),
+(4, 4, 15, '2021-02-12'),
+(5, 5, 20, '2021-04-04'),
+(6, 7, 11, '2019-09-02'),
+(7, 6, 16, '2018-11-11'),
+(8, 8, 16, '2020-08-15'),
+(9, 9, 18, '2019-10-10'),
+(10, 10, 3, '2019-10-10');
+
+SELECT * FROM Zamówienia;
+
+
+-- Tabela „Klienci” – 10 pozycji
+
+INSERT INTO Klienci (Id_klienta, Id_zamówienia, Imię, Nazwisko, adres)
+VALUES (1, 1, 'Anna', 'Pitka', 'Osiedle_Południe_108_19-200_Grajewo'),
+(2, 3, 'Konrad', 'Daraż', 'Aleja_Wilanowska_31_23_02-765_Warszawa'),
+(3, 2, 'Emilia', 'Daraż', 'Aleja_Wilanowska_31_23_02-765_Warszawa'),
+(4, 4, 'Magdalena', 'Łempicka', 'Osiedle_Południe_108_19-200_Grajewo'),
+(5, 5, 'Hanna', 'Mroczkowska', 'Wołodyjowskiego_5_19-230_Szczuczyn'),
+(6, 7, 'Jarosław', 'Mroczkowski', 'Wołodyjowskiego_5_19-230_Szczuczyn'),
+(7, 6, 'Kamil', 'Pytel', 'Aleja_Rzeczypospolitej_18_02-777_Warszawa'),
+(8, 8, 'Aleksander', 'Daraż', 'Aleja_Wilanowska_31_23_02-765_Warszawa'),
+(9, 9, 'Anna', 'Pytel', 'Aleja_Rzeczypospolitej_18_02-777_Warszawa'),
+(10, 10, 'Marcin', 'Rudnik', 'Aleja_Rzeczypospolitej_9_02-777_Warszawa');
+
+SELECT * FROM Klienci;
+
+-- 8. Wyświetl wszystkie produkty z wszystkimi danymi od producenta który znajduje się na pozycji 1 w tabeli „Producenci”
+
+SELECT *  FROM Producenci, Produkty
+WHERE Producenci.Nazwa_producenta = Produkty.nazwa_producenta
+AND Produkty.id_produktu = 1;
+
+-- 9. Posortuj te produkty alfabetycznie po nazwie
+
+SELECT *  FROM Producenci, Produkty
+WHERE Producenci.Nazwa_producenta = Produkty.nazwa_producenta
+ORDER BY Produkty.nazwa_producenta ASC;
+
+-- 10. Wylicz średnią cenę za produktu od producenta z pozycji 1
+
+SELECT (AVG(Produkty.cena_netto_zakupu)) AS 'Średnia cena produktu'
+FROM Producenci, Produkty
+WHERE Producenci.Nazwa_producenta = Produkty.nazwa_producenta
+AND Produkty.id_produktu = 1;
+SELECT * FROM Produkty;
+
+-- 11. Wyświetl dwie grupy produktów tego producenta:
+-- Połowa najtańszych to grupa: „Tanie”
+-- Pozostałe to grupa: „Drogie”
+
+SELECT Producenci.Nazwa_producenta, Produkty.cena_netto_zakupu, (CASE WHEN Produkty.cena_netto_zakupu < (SELECT AVG(Produkty.cena_netto_zakupu) FROM Produkty) THEN 'Tanie'
+							 WHEN Produkty.cena_netto_zakupu > (SELECT AVG(Produkty.cena_netto_zakupu) FROM Produkty) THEN 'Drogie'
+							 END) 
+FROM Producenci INNER JOIN Produkty
+ON Producenci.Nazwa_producenta = Produkty.nazwa_producenta
+AND Producenci.Id_producenta = 1 ;
+
+-- 12. Wyświetl produkty zamówione, wyświetlając tylko ich nazwę
+
+SELECT Produkty.nazwa_produktu
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu;
+
+-- 13. Wyświetl wszystkie produkty zamówione – ograniczając wyświetlanie do 5 pozycji
+
+SELECT Produkty.nazwa_produktu
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu
+LIMIT 5;
+
+-- 14. Policz łączną wartość wszystkich zamówień
+
+SELECT SUM(Produkty.cena_netto_zakupu)
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu;
+
+-- 15. Wyświetl wszystkie zamówienia wraz z nazwą produktu sortując je wg daty od najstarszego do najnowszego
+
+SELECT Produkty.Nazwa_produktu, Zamówienia.Data_zamówienia 
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu
+ORDER BY Zamówienia.Data_zamówienia ASC;
+
+-- 16. Sprawdź czy w tabeli produkty masz uzupełnione wszystkie dane – wyświetl pozycje dla których brakuje danych
+
+SELECT * FROM Produkty
+WHERE id_produktu IS NULL OR nazwa_producenta IS NULL OR nazwa_produktu IS NULL OR opis_produktu IS NULL 
+OR cena_netto_zakupu IS NULL OR cena_brutto_zakupu IS NULL OR cena_netto_sprzedaży IS NULL OR cena_brutto_sprzedaży IS NULL
+OR procent_VAT_sprzedaży IS NULL;
+
+
+-- 17. Wyświetl produkt najczęściej sprzedawany wraz z jego ceną
+
+SELECT Produkty.nazwa_produktu, Produkty.cena_netto_zakupu
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu
+GROUP BY Produkty.nazwa_produktu
+ORDER BY COUNT(Produkty.nazwa_produktu) DESC
+LIMIT 1;
+
+-- 18. Znajdź dzień w którym najwięcej zostało złożonych zamówień
+
+SELECT COUNT(Zamówienia.Data_zamówienia), Zamówienia.Data_zamówienia
+FROM Zamówienia, Produkty
+WHERE Zamówienia.Id_produktu = Produkty.id_produktu
+GROUP BY Zamówienia.Data_zamówienia
+HAVING COUNT(Zamówienia.Data_zamówienia)>=2 
+ORDER BY Zamówienia.Data_zamówienia DESC;
