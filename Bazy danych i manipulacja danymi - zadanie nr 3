@@ -1,0 +1,39 @@
+-- 3.1 - zadanie nr 1 - posiadam już bazę Pracownicy, więc jedynie ją wczytałam
+USE Pracownicy;
+
+-- 3.2 - zadanie nr 2
+CREATE TABLE Pracownicy (
+ID INTEGER PRIMARY KEY,
+Imię VARCHAR (15),
+Nazwisko TEXT,
+Wiek VARCHAR (2),
+Kurs TEXT
+);
+
+
+-- 3.3 - zadanie nr 3 - zaimportowałam dane z danymi CVS, w celu weryfikacji, czy dane zaciągneły się poprawnie skorzystam z kwerendy wyświetl wszystkie
+SELECT * FROM Pracownicy;
+
+-- 3.4 - zadanie nr 4
+SELECT * FROM Pracownicy
+WHERE Nazwisko = 'KOWALCZYK';
+
+-- 3.5 - zadanie nr 5
+SELECT * FROM Pracownicy
+WHERE Wiek >=30 AND Wiek<=40;
+
+-- 3.6 - zadanie nr 6
+SELECT * FROM Pracownicy
+WHERE Nazwisko != '%and%';
+
+-- 3.7 - zadanie nr 7
+SELECT * FROM Pracownicy
+WHERE ID <8;
+
+-- 3.8 - zadanie nr 8 - Brak takich rekordów
+SELECT *FROM Pracownicy
+WHERE ID = NULL OR Imię = NULL OR Nazwisko = NULL OR Wiek = NULL OR Kurs = NULL;
+
+-- 3.9 - zadanie nr 9 - Brak takich rekordów
+SELECT * FROM Pracownicy
+WHERE Kurs=NULL;
