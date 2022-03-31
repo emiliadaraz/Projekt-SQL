@@ -1,0 +1,42 @@
+-- 2.1 - zadanie nr 1 - posiadam już bazę Pracownicy, wiec nie tworze nowej, jedynie wczytuje już istniejącą
+USE DATABASE Pracownicy;
+
+-- 2.2 - zadanie nr 2
+CREATE TABLE Pracownicy (
+ID INTEGER PRIMARY KEY,
+Imię VARCHAR (30),
+Nazwisko VARCHAR (30),
+Wiek VARCHAR (2),
+Kurs TEXT
+);
+
+-- 2.3 - zadanie nr 3 - na nowo wgrałam tabelę z pliku CSV
+
+-- 2.4 - zadanie nr 4
+SELECT * FROM Pracownicy
+WHERE Wiek = 28;
+
+
+-- 2.5 - zadanie nr 5
+SELECT * FROM Pracownicy
+WHERE Wiek <= 30;
+
+-- 2.6 - zadanie nr 6
+SELECT * FROM Pracownicy
+WHERE Nazwisko LIKE '%ski%';
+
+-- 2.7 - zadanir nr 7
+SELECT * FROM Pracownicy
+WHERE ID =1 OR
+ ID = 4 OR
+ ID = 7 OR
+ ID = 18 OR
+ ID = 20;
+ 
+ -- 2.8 - zadanie nr 8 - wszystkie rekordy uzupełnione są poprawnie. Nie występuje w żadnym rekordzie NULL
+ SELECT * FROM Pracownicy;
+ 
+ -- 2.9 - zadanie nr 9
+ SELECT*FROM Pracownicy
+WHERE  Kurs <> 'DS';
+ 
