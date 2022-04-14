@@ -1,0 +1,51 @@
+-- 5.1 - zadanie nr 1
+CREATE DATABASE Lista_Pracowników;
+
+-- 5.2 i 5.3 - zadanie nr 2, 3
+USE Lista_Pracowników;
+CREATE TABLE Pracownicy (
+ID INTEGER PRIMARY KEY,
+Imię VARCHAR (20),
+Nazwisko VARCHAR (30),
+Stanowisko TEXT,
+Dział CHAR (30)
+);
+
+-- 5.4 - zadanie nr 4
+INSERT INTO Pracownicy (ID, Imię, Nazwisko, Stanowisko, Dział)
+VALUES (1, 'Emilia', 'Daraż', 'Project_Manager', 'Dział_Inwestycji'),
+(2, 'Ksenia', 'Aleksiejuk', 'Specjalista_ds_Administracji', 'Dział_Inwestycji'),
+(3, 'Piotr', 'Andrejuk', 'Project_Manager', 'Dział_Inwestycji'),
+(4, 'Marcin', 'Puchalski', 'Młodszy_Specjalista_ds_Ochrony_Środowiska', 'Dział_Środowiska'),
+(5, 'Monika', 'Gawlik', 'Specjalista_ds_Technicznych', 'Dział_Techniczny')
+;
+
+-- 5.5 - zadanie nr 5
+SELECT * FROM Pracownicy;
+
+-- 5.6 - zadanie nr 6
+ALTER TABLE Pracownicy ADD COLUMN Data_zatrudnienia DATE ;
+
+-- 5.7 - zadanie nr 7
+INSERT INTO Pracownicy (ID, Imię, Nazwisko, Stanowisko, Dział, Data_zatrudnienia)
+VALUES (6, 'Konrad', 'Przyimek', 'Project_Manager', 'Dział_Inwestycji', '2021-04-13');
+
+-- 5.8 - zadanie nr 8 - w pozycji nr 6 są kompletne dane, zaś w reszcie pozycji zostało wprowadzone stwierdzenie NULL
+SELECT * FROM Pracownicy;
+
+-- 5.9 - zadanie nr 9
+UPDATE Pracownicy
+SET Data_zatrudnienia = '2014-04-20'
+WHERE ID=1;
+UPDATE Pracownicy
+SET Data_zatrudnienia = '2015-05-20'
+WHERE ID=2;
+UPDATE Pracownicy
+SET Data_zatrudnienia = '2021-11-21'
+WHERE ID=3;
+UPDATE Pracownicy
+SET Data_zatrudnienia = '2021-11-21'
+WHERE ID>=4 AND ID < 6;
+
+-- 5.10 - zadanie nr 10 - nie zuważyłam żadnej zmiany w ID
+SELECT * FROM Pracownicy;
