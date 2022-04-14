@@ -1,0 +1,30 @@
+-- a
+SELECT CONCAT (first_name, ' ', last_name) AS 'Pracownik' FROM aggregates.batman;
+
+-- b
+ SELECT CONCAT (gift, ' - ', price) AS 'cennik' FROM aggregates.batman;
+ 
+-- c
+SELECT CONCAT (first_name,' ' , last_name, ' ' , gift, ' - ', price) AS 'cennik' FROM aggregates.batman;
+
+-- d
+SELECT UPPER (gift) FROM aggregates.batman;
+
+-- e
+SELECT LOWER (first_name) FROM aggregates.batman;
+
+-- f
+SELECT last_name, LENGTH(last_name) AS 'dlugosc'
+FROM aggregates.batman 
+GROUP BY last_name;
+
+-- g
+SELECT SUBSTRING(first_name, 1, 2) FROM aggregates.batman;
+
+-- h
+SELECT CONCAT( SUBSTR(LOWER(first_name), 1, 1),
+       SUBSTR(LOWER(last_name), 1, 3)),
+        id
+    FROM aggregates.batman 
+   WHERE id <=3
+GROUP BY id;
