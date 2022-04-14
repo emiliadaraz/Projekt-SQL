@@ -1,0 +1,58 @@
+-- 3.1 - zadanie nr 1
+CREATE DATABASE School_Coding;
+
+-- 3.2, 3.3 - zadanie nr 2 i 3
+USE School_Coding;
+CREATE TABLE Mentors (
+ID INTEGER UNIQUE NOT NULL,
+Imię VARCHAR (30),
+Nazwisko VARCHAR (30),
+Specjalizacja  VARCHAR (30),
+Data_zatrudnienia DATE,
+Data_zwolnienia DATE
+);
+
+-- 3.4 - zadanie nr 4
+INSERT INTO Mentors (ID, Imię, Nazwisko, Specjalizacja, Data_zatrudnienia, Data_zwolnienia)
+VALUES (1, 'Emilia', 'Daraż', 'Kierownik_projektu', '2018-05-05', '2021-05-05'),
+(2, 'Karolina', 'Piłkarzyk', 'Fryzjerka', '2005-10-05', '2010-02-10'),
+(3, 'Michał', 'Pimka', 'Magazynier', '2018-02-23', '2018-04-23'),
+(4, 'Kamil', 'Mroczkowski', 'Kasjer', '2015-01-01', '2020-11-05'),
+(5, 'Rafał', 'Świderski', 'Kierownik_zmiany', '2018-05-06', '2021-12-31'),
+(6, 'Rafał', 'Kadłubek', 'Kierownik_projektu', '2018-05-06', '2021-12-31'),
+(7, 'Alicja', 'Kossakowska', 'Kasjerka', '2000-01-06', '2021-12-29'),
+(8, 'Julian', 'Tuwim', 'Kierownik_zmiany', '2015-05-16', '2021-09-30'),
+(9, 'Konrad', 'Daraż', 'Przedsiebiorca', '2018-03-26', '2021-11-25'),
+(10, 'Magdalena', 'Mroczkowska', 'Laborantka', '2014-03-06', '2021-01-31');
+
+-- 3.5 - zadanie nr 5
+SELECT * FROM Mentors;
+
+-- 3.6 - zadanie nr 6
+UPDATE Mentors
+SET Nazwisko = 'Fistaszek'
+WHERE id = 5;
+
+--3.7 - zadanie nr 7
+SELECT * FROM Mentors WHERE id=5;
+
+-- 3.8 - zadanie nr 8
+UPDATE Mentors
+SET Specjalizacja = 'Kasjer'
+WHERE id = 9;
+
+--3.9 - zadanie nr 9
+SELECT * FROM Mentors WHERE id=9;
+
+--3.10 - zadanie nr 10
+ALTER TABLE Mentors ADD COLUMN Wynagrodzenie DOUBLE ;
+
+--3.11 - zadanie nr 11
+UPDATE Mentors
+SET Wynagrodzenie = 1000
+WHERE id <4;
+
+--3.12 - zadanie nr 12
+SELECT * FROM Mentors WHERE id<4;
+
+
