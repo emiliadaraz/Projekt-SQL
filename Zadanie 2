@@ -1,0 +1,46 @@
+-- 2.1 - zadanie nr 1
+CREATE DATABASE moja_baza;
+
+-- 2.2 - zadanie nr 2
+USE moja_baza;
+CREATE TABLE Biblioteczka (
+id INTEGER UNIQUE NOT NULL,
+Tytuł TEXT,
+Data_zakupu DATE
+);
+
+-- 2.3 - zadanie nr 3
+INSERT INTO Biblioteczka (id, Tytuł, Data_zakupu) 
+VALUES (1, 'Alchemik', '2021-12-05');
+
+-- 2.4 - zadanie nr 4
+SELECT * FROM Biblioteczka;
+
+-- 2.5 - zadanie nr 5
+INSERT INTO Biblioteczka (id, Tytuł, Data_zakupu) 
+VALUES (2, 'Prostota', '2020-06-05') ,
+(3, 'Droga', '2021-09-08');
+
+-- 2.6 - ZADANIE NR 6
+UPDATE Biblioteczka
+SET Tytuł = 'Zmora'
+WHERE id = 2;
+
+-- 2.7 - zadanie nr 7
+ALTER TABLE Biblioteczka ADD COLUMN Autor TEXT;
+
+-- 2.8 - zadanie nr 8
+UPDATE Biblioteczka
+SET Autor = 'Paulo Coelho'
+WHERE id <> 2;
+
+UPDATE Biblioteczka
+SET Autor = 'Robert Małecki'
+WHERE id = 2;
+
+-- 2.9 - zadanie nr 9
+DELETE FROM Biblioteczka
+WHERE id > 1;
+
+-- 2.10 - zadanie nr 10
+SELECT Autor FROM Biblioteczka;
