@@ -1,0 +1,56 @@
+ -- 4.1 zadanie nr 1
+ CREATE DATABASE Lista_Prezentów;
+ 
+ -- 4.2 i 4.3 zadanie nr 2 i 3
+ USE Lista_Prezentów;
+CREATE TABLE Prezenty_2020 (
+ID INTEGER PRIMARY KEY,
+Imię_obdarowanego VARCHAR (30),
+Pomysł_na_prezent TEXT,
+Cena DOUBLE DEFAULT 0 CHECK(Cena >= 0 and Cena <=100),
+Miejsce_zakupu TEXT
+);
+
+-- 4.4 - zadanie nr 4
+INSERT INTO Prezenty_2020 (ID, Imię_obdarowanego, Pomysł_na_prezent, Cena, Miejsce_zakupu)
+VALUES (1, 'Emilia', 'portfel', 55.60, 'Galeria_Handlowa'),
+(2, 'Emilia', 'wazon_na_kwiaty', 38.80, 'Sklep_internetowy'),
+(3, 'Anna', 'blender', 89.69, 'Sklep_stacjonarny'),
+(4, 'Karolina', 'Ramka_na_zdjęcia', 73.60, 'Sklep_internetowy'),
+(5, 'Kamil', 'długopis', 25.60, 'Sklep_internetowy'),
+(6, 'Karol', 'portfel', 55.60, 'Galeria_Handlowa'),
+(7, 'Aleksander', 'ochrona_laptopa', 140.00, 'Galeria_Handlowa'),
+(8, 'Aleksandra', 'torebka_miejska', 99.00, 'Galeria_Handlowa'),
+(9, 'Emilia', 'szalik_zimoqy', 15.34, 'Rynek'),
+(10, 'Kamil', 'czapka_zimowa', 35.00, 'Rynek');
+
+-- 4.5 - zadanie nr 5
+SELECT * FROM Prezenty_2020;
+
+-- 4.6 - zadanie nr 6
+UPDATE Prezenty_2020
+SET Pomysł_na_prezent = 'Rower'
+WHERE ID=3;
+
+-- 4.7 - zadanie nr 7
+SELECT * FROM Prezenty_2020;
+
+-- 4.8 - zadanie nr 8
+DELETE FROM Prezenty_2020
+WHERE ID=1;
+
+-- 4.9 - zadanie nr 9 - ID 1 zostało usunięte i poniższe ID się nie nadpisały, więc po prostu w tabeli nie ma ID = 1
+SELECT * FROM Prezenty_2020;
+
+--4.10 - zadanie nr 10
+ALTER TABLE Prezenty_2020
+DROP COLUMN Miejsce_zakupu;
+
+--4.11 - zadanie nr 11
+SELECT (Imię_obdarowanego) FROM Prezenty_2020
+WHERE ID>2 AND ID<6;
+
+
+
+
+
