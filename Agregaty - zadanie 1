@@ -1,0 +1,57 @@
+-- a
+SELECT COUNT(id) FROM aggregates.batman;
+
+-- b
+SELECT COUNT(age) FROM aggregates.batman;
+
+-- c
+SELECT COUNT(age) FROM aggregates.batman WHERE age >40;
+
+-- d
+SELECT SUM(price) FROM aggregates.batman;
+
+-- e
+SELECT SUM(age) FROM aggregates.batman WHERE sex='F';
+
+-- f
+SELECT SUM(price) FROM aggregates.batman WHERE gift='komputer' OR gift='okno';
+
+-- g
+SELECT MAX(price) FROM aggregates.batman;
+
+-- h
+SELECT MAX(start_date) FROM aggregates.batman;
+
+-- i 
+SELECT MAX(first_name) FROM aggregates.batman;
+
+-- j
+SELECT MIN(price) FROM aggregates.batman;
+
+-- k
+SELECT MIN(start_date) FROM aggregates.batman;
+
+-- l
+SELECT MIN(first_name) FROM aggregates.batman;
+
+-- m
+SELECT  MIN(price) AS 'cena minimalna',
+MAX(price) AS 'cena maksymalna'
+FROM aggregates.batman;
+
+-- n
+SELECT  MAX(price) - MIN(price) AS 'różnica'
+FROM aggregates.batman;
+
+-- o
+SELECT AVG(age) FROM aggregates.batman;
+
+-- p
+SELECT SUM(age)/COUNT(age) FROM aggregates.batman;
+
+-- q
+SELECT
+AVG(age) AS 'średni wiek', sex  
+FROM aggregates.batman
+GROUP BY sex;
+GROUP BY id;
