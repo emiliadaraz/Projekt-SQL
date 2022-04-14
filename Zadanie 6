@@ -1,0 +1,42 @@
+-- 6.1 - zadanie nr 1
+CREATE DATABASE Moje_zainteresowanie;
+
+-- 6.2 i 6.3 - zadanie nr 2 i 3
+USE Moje_zainteresowanie;
+CREATE TABLE Zainteresowanie (
+ID INTEGER,
+Nazwa VARCHAR (30),
+Opis TEXT,
+Data_realizacji DATE
+);
+
+-- 6.4 - zadanie nr 4
+INSERT INTO Zainteresowanie ( Nazwa, Opis)
+VALUES ('Taniec', 'Nauka_tańca_orientalnego'),
+('Programowanie', 'Programowanie_w_Python'),
+('OZE', 'Development_w_Odnawialnych_Zródłach_Energii'),
+('Fotowoltaika', 'Mechanizm_działania_farm_fotowoltaicznych'),
+('Drewno', 'Tworzenie_produktów_z_wykorzystaniem_drewna_naturalnego');
+
+-- 6.5 - zadanie nr 5 - w kolumnie ID i Data_realizacji - pojawił się NULL
+SELECT * FROM Zainteresowanie;
+
+-- 6.6 - zadanie nr 6
+INSERT INTO Zainteresowanie ( ID, Nazwa, Opis, Data_realizacji)
+VALUES (5, 'Bieganie', 'Chęć_zmiany_sylwetki','2022-02-10' );
+
+-- 6.7 - zadanie nr 7 
+UPDATE Zainteresowanie
+SET ID = 4,
+Data_realizacji = '2021-12-12'
+WHERE Nazwa = 'Fotowoltaika';
+
+-- 6.8 - zadanie nr 8
+SELECT * FROM Zainteresowanie;
+
+-- 6.9 - zadanie nr 9
+DELETE FROM Zainteresowanie
+WHERE ID= NULL;
+
+-- 6.10 - zadanie nr 10
+SELECT * FROM Zainteresowanie;
