@@ -1,0 +1,11 @@
+-- a
+SELECT ROUND(AVG(age), 2)  FROM aggregates.batman;
+
+-- b
+SELECT ABS(-3);
+
+-- c
+SELECT 2*3 AS wynik;
+
+-- d
+SELECT 6/2 AS wynik;
