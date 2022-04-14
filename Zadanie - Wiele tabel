@@ -1,0 +1,93 @@
+-- 1
+SELECT *
+FROM customer a,orders b
+WHERE a.CUST_CODE=b.CUST_CODE
+AND b.ORD_DATE = '2008-01-08'
+
+
+-- 2
+SELECT agents.AGENT_NAME,
+customer.cust_name, customer.WORKING_AREA
+FROM customer , agents 
+WHERE agents.WORKING_AREA =customer.WORKING_AREA;
+
+-- a INNER JOIN
+SELECT customer.cust_name, customer.WORKING_AREA, agents.AGENT_NAME AS "Salesman", agents.COMMISSION
+FROM customer INNER JOIN  agents
+ON customer.AGENT_CODE=agents.AGENT_CODE
+WHERE agents.COMMISSION > '0.12';
+
+-- b INNER JOIN
+SELECT orders.ORD_NUM, orders.ORD_DATE, orders.ORD_AMOUNT, customer.cust_name AS "Customer_Name", agents.AGENT_NAME AS "Salesman", agents.COMMISSION
+FROM orders INNER JOIN  customer
+ON orders.CUST_CODE=customer.CUST_CODE
+INNER JOIN agents
+ON customer.AGENT_CODE=agents.AGENT_CODE;
+
+-- a LEFT JOIN
+SELECT customer.cust_name, customer.WORKING_AREA, agents.AGENT_NAME AS "Salesman", agents.WORKING_AREA
+FROM customer LEFT JOIN  agents
+ON customer.AGENT_CODE=agents.AGENT_CODE
+ORDER BY customer.CUST_CODE;
+
+-- a RIGHT JOIN
+SELECT customer.cust_name, customer.WORKING_AREA, agents.AGENT_NAME AS "Salesman", agents.WORKING_AREA
+FROM customer RIGHT JOIN  agents
+ON customer.AGENT_CODE=agents.AGENT_CODE
+ORDER BY agents.AGENT_CODE;
+
+-- a CROSS JOIN
+SELECT * FROM agents
+CROSS JOIN  customer;
+
+-- b CROSS JOIN
+SELECT * FROM agents
+CROSS JOIN  customer
+ON agents.WORKING_AREA=customer.WORKING_AREA;
+
+-- c CROSS JOIN
+SELECT * FROM agents
+CROSS JOIN  customer
+WHERE agents.WORKING_AREA<>customer.WORKING_AREA
+AND agents.WORKING_AREA IS NOT NULL 
+AND customer.GRADE IS NOT NULL;
+
+-- a UNION
+SELECT AGENT_CODE AS ID, AGENT_NAME, 'Salesman' AS "Rodzaj" FROM agents
+WHERE WORKING_AREA = 'London'
+UNION 
+SELECT CUST_CODE AS ID, CUST_NAME, 'Customer' AS "Rodzaj" FROM customer
+WHERE WORKING_AREA = 'London';
+-- b UNION
+SELECT a.AGENT_CODE, AGENT_NAME, ord_num, 'najwyższa, ord_date
+FROM agents a, orders b
+WHERE a.AGENT_CODE = b.AGENT_CODE
+AND b.ORD_AMOUNT=
+(SELECT MAX(ORD_AMOUNT)
+FROM orders c
+WHERE c.ord_date = b.ord_date)
+UNION
+(SELECT a.agent_code, AGENT_NAME, ord_num, 'najniższa', ord_date
+FROM agents a, orders b
+WHERE a.AGENT_CODE = b.AGENT_CODE
+AND b.ord_amount=
+(SELECT MIN(ord_amount)
+FROM orders c
+WHERE c.ord_date = b.ord_date))
+
+-- a WITH
+CREATE VIEW londonstaff AS SELECT * FROM agents
+WHERE WORKING_AREA = "London";
+SELECT * FROM londonstaff
+WHERE COMMISSION > 0.14;
+
+-- b WITH (trzeba zweryfikować, czy wcześniej nie utworzyło się tabeli o tej nazwie, tutaj była utworzona, więc program nie chciał utworzyc widoku o tej samej nazwie co już sitniejaca tabela, wiec dodałam 1 na koneic nazwy
+CREATE VIEW gradecount (GRADE,NUMBER) AS SELECT GRADE, COUNT(*) FROM customer
+GROUP BY GRADE;
+
+-- c WITH (trzeba zweryfikować, czy wcześniej nie utworzyło się tabeli o tej nazwie, tutaj była utworzona, więc program nie chciał utworzyc widoku o tej samej nazwie co już sitniejaca tabela, wiec dodałam 1 na koneic nazwy)
+CREATE VIEW total_per_dzien1
+AS SELECT ORD_DATE, COUNT(DISTINCT CUST_CODE),
+AVG(ORD_AMOUNT), SUM(ORD_AMOUNT)
+FROM orders
+GROUP BY ORD_DATE;
